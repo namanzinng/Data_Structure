@@ -41,6 +41,6 @@ Welcome to the Sorting Mini Project! This project allows users to input or gener
 
 ## Future Improvements
 
-- [Add any potential future improvements or features here]
+- Add any potential future improvements or features here
 
 Feel free to explore and experiment with different arrays and sorting algorithms!
