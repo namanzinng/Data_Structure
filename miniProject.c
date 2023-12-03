@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 void swap(int *a, int *b) 
 {
     int temp = *a;
@@ -330,6 +331,7 @@ void compareSortingAlgorithms(int originalArr[], int n)
 
     // Display the execution times
     printf("\nTime taken by each algorithm:\n");
+    printf("\n");
     for (int i = 0; i < 5; i++) 
     {
         printf("%d. %s: %f seconds\n", i + 1, algorithmNames[i], executionTimes[i]);
@@ -361,9 +363,28 @@ void compareSortingAlgorithms(int originalArr[], int n)
 
     printf("\nBest Algorithm: %s (Execution Time: %f seconds)\n", bestAlgorithm, minTime);
     printf("Worst Algorithm: %s (Execution Time: %f seconds)\n", worstAlgorithm, maxTime);
+    printf("\n");
 
     // Free the memory allocated for the copy array
     free(copyArr);
+}
+
+void displayBruteForceOptions() 
+{
+    printf("Choose a sorting algorithm (Brute Force):\n");
+    printf("1. Insertion Sort\n");
+    printf("2. Selection Sort\n");
+    printf("3. Bubble Sort\n");
+    printf("Enter your choice (1-3): ");
+}
+
+void displayDivideConquerOptions() 
+
+{
+    printf("Choose a sorting algorithm (Divide and Conquer):\n");
+    printf("1. Merge Sort\n");
+    printf("2. Quick Sort\n");
+    printf("Enter your choice (1-2): ");
 }
 
 int main() 
@@ -392,6 +413,7 @@ int main()
         system("clear");
 
         printf("\n Select your choice :\n");
+        printf("\n");
 
         printf("1. Enter the array manually \n");
         printf("2. Generate a random array \n");
@@ -442,78 +464,106 @@ int main()
 
         if (n <= 100) 
         {
-            printf("For small arrays, Insertion Sort or Selection Sort may be efficient.\n");
+            printf("For small arrays, Brute Force may be efficient.\n");
             printf("\n");
         } 
         else 
         {
-            printf("For larger arrays, Merge Sort or Quick Sort is recommended.\n");
+            printf("For larger arrays, Divide and Conquer is recommended.\n");
             printf("\n");
         }
 
-        printf("Choose a sorting algorithm:\n");
-        printf("1. Insertion Sort\n");
-        printf("2. Selection Sort\n");
-        printf("3. Merge Sort\n");
-        printf("4. Quick Sort\n");
-        printf("5. Bubble Sort\n");
-        printf("Enter your choice (1-5): ");
+    
+    int methodChoice;
+        
+    printf("Choose a method:\n");
+    printf("1. Brute Force\n");
+    printf("2. Divide and Conquer\n");
+    printf("Enter your choice (1 or 2): ");
+    scanf("%d", &methodChoice);
 
-        scanf("%d", &choice);
+    system("clear");
 
-        system("clear");
+    if (methodChoice != 1 && methodChoice != 2) 
+    {
+        printf("Invalid choice. Please enter either 1 or 2. \n");
+        return 0;
+    }
+  
+     system("clear");
+    
+    int sortingChoice;
 
-        if (choice < 1 || choice > 5) 
-        {
-            printf("Invalid choice. Please enter a number between 1 and 5.\n");
-            continue;
-        }
+    switch (methodChoice) 
+    
+    {
+        case 1:
 
-        switch (choice) 
-        {
-            case 1:
-                printf("Original Array:\n");
-                printf("\n");
-                printArray(arr, n);
-                printf("\nAfter applying Insertion Sort:\n");
-                insertionSort(arr, n);
-                break;
+            displayBruteForceOptions();
+            scanf("%d", &sortingChoice);
+            system("clear");
+            switch (sortingChoice) 
+            
+            {
+                case 1:
+                    printf("Original Array:\n");
+                    printf("\n");
+                    printArray(arr, n);
+                    printf("\nAfter applying Insertion Sort:\n");
+                    insertionSort(arr, n);
+                    break;
 
-            case 2:
-                printf("Original Array:\n");
-                printf("\n");
-                printArray(arr, n);
-                printf("\nAfter applying Selection Sort:\n");
-                selectionSort(arr, n);
-                break;
+                case 2:
+                    printf("Original Array:\n");
+                    printf("\n");
+                    printArray(arr, n);
+                    printf("\nAfter applying Selection Sort:\n");
+                    selectionSort(arr, n);
+                    break;
 
-            case 3:
-                printf("Original Array:\n");
-                printf("\n");
-                printArray(arr, n);
-                printf("\nAfter applying Merge Sort:\n");
-                mergeSort(arr, 0, n - 1);
-                break;
+                case 3:
+                    printf("Original Array:\n");
+                    printf("\n");
+                    printArray(arr, n);
+                    printf("\nAfter applying Bubble Sort:\n");
+                    bubbleSort(arr, n);
+                    break;
+            }
 
-            case 4:
-                printf("Original Array:\n");
-                printf("\n");
-                printArray(arr, n);
-                printf("\nAfter applying Quick Sort:\n");
-                quickSort(arr, 0, n - 1);
-                break;
+            break;
 
-            case 5:
-                printf("Original Array:\n");
-                printf("\n");
-                printArray(arr, n);
-                printf("\nAfter applying Bubble Sort:\n");
-                bubbleSort(arr, n);
-                break;
+        case 2:
 
-            default:
-                printf("Invalid choice\n");
-        }
+            displayDivideConquerOptions();
+            scanf("%d", &sortingChoice);
+            system("clear");
+            switch (sortingChoice) 
+            
+            {
+                case 1:
+                    printf("Original Array:\n");
+                    printf("\n");
+                    printArray(arr, n);
+                    printf("\nAfter applying Merge Sort:\n");
+                    mergeSort(arr, 0, n - 1);
+                    break;
+
+                case 2:
+                    printf("Original Array:\n");
+                    printf("\n");
+                    printArray(arr, n);
+                    printf("\nAfter applying Quick Sort:\n");
+                    quickSort(arr, 0, n - 1);
+                    break;
+            }
+
+            break;
+
+        default:
+            printf("Invalid method choice\n");
+            return 0;
+    }
+
 
         clock_t start, end;
         double timeTaken;
@@ -571,6 +621,7 @@ int main()
 
          // Display time taken by the selected algorithm
         printf("Time taken by the selected algorithm: %f seconds\n", timeTaken);
+        printf("\n");
 
 
 
@@ -593,7 +644,11 @@ int main()
         scanf("%d", &continueSorting);
 
         free(arr);
+
+        system("clear");
     }
+
+   
 
     return 0;
 }
